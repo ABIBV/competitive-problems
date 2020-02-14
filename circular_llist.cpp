@@ -34,25 +34,7 @@ class llist{
             }
         
         }
-        
-        // void reverse(){
-        //     Node *curr, *next, *prev;
-        //     next = NULL;
-        //     curr = head;
-        //     while(curr->next!=head){
-        //         curr=curr->next;
-        //     }
-        //     prev = curr->next;
- 
-        //     while(curr->next!=head){
-        //         next = curr->next;
-        //         curr->next = prev;
-        //         prev = curr;
-        //         curr = next;
-        //     }
-        //     head = prev;
-        // }
- 
+         
          int length(){
             Node *curr;
             curr = head;
