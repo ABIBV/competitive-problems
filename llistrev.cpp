@@ -1,85 +1,51 @@
 #include <iostream>
-
+ 
 using namespace std;
-
-struct Node{
-    int data;
-    struct Node *next;
-    Node(int data){
-        this->data = data;
-        this->next = NULL;
-    }    
-};
-
-struct llist{
-    Node *head;
-    llist(){
-        head = NULL;
-    }
-
-    void insert(int data){
-        Node *temp = new Node(data);
-        if(head == NULL){
-            head = temp;
+ 
+class llist{
+    struct Node{
+        int data;
+        struct Node *next;
+        Node(int data){
+            this->data = data;
+            this->next = NULL;
+        }    
+    };
+    public:
+        Node *head;
+        llist(){
+            head = NULL;
         }
-        else{
+ 
+        void insert(int data){
+            Node *temp = new Node(data);
             Node *curr;
-            curr=head;
-            while(curr->next!=NULL){
-                curr=curr->next;
+            if(head == NULL){
+                head = temp;
+                temp->next = head;
             }
-            curr->next = temp;
-        }
+            else{
+                curr=head;
+                while(curr->next!=head){
+                    curr=curr->next;
+                }
+                curr->next=temp;
+                temp->next = head;
+            }
         
-        
-    }
-
-    void reverse(){
-        Node *curr, *next, *prev;
-        next = NULL;
-        prev = NULL;
-        curr = head;
-        while(curr!=NULL){
-            next = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = next;
         }
-        head = prev;
-    }
-
-    void recursion(){
-        recrev(head,NULL,NULL);
-    }
-
-    void recrev(Node *curr, Node *next, Node *prev){
-
-        if(curr==NULL){
-            head=prev;
-            return;
+         
+         int length(){
+            Node *curr;
+            curr = head;
+            int count= 1;
+            while(curr->next!=head){
+                curr = curr->next;
+                count++;
+            }
+            return count;
         }
-        else{
-            next = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = next;
-            head = prev;
-            recrev(curr, next, prev);
-        }
-    
-        }
-
-    int length(){
-        Node *curr;
-        curr = head;
-        int count= 0;
-        while(curr!=NULL){
-            curr = curr->next;
-            count++;
-        }
-        return count;
-    }
-
+ 
     void deletefromlast(int k){
         int l = length();
         int del = l - k;
@@ -92,26 +58,40 @@ struct llist{
         prev->next=curr->next;
         curr= NULL;
     }
-
-    void deletefromlast2ptr(int k){
-        Node *one, *two, *prev;
-        one = head;
-        two = head;
-        for(int i=0;i<k;i++){
-            two = two->next;
-        }
-        if()
-        while(two!=NULL){
-            two = two->next;
-            prev = one;
-            one = one->next;
-        }
-        prev->next = one->next;
-        one=NULL;
-
+    
+    void reverse(){
+      Node *curr, *next, *prev;
+      curr = head;
+      prev = head;
+      next = NULL;
+      while(prev->next!= head){
+        prev = prev -> next; 
+      }
+      while(next!=head){
+        next = curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=next;
+      }
+      head=prev;
     }
-        
 
+    void iscircular(){
+        Node *curr;
+        curr = head;
+        while(true){
+            curr = curr->next;
+            if(curr==head){
+                cout<<"List is Circular..."<<endl;
+                return;
+            }
+            if(curr==NULL){
+                cout<<"List is not Circular"<<endl;
+                return;
+            }
+        }
+    }
+    
     void display(){
         if(head == NULL){
             cout<<"No Node Present"<<endl;
@@ -119,16 +99,16 @@ struct llist{
         else{
             Node *curr;
             curr = head;
-            while(curr -> next !=NULL){
+            while(curr->next!=head){
                 cout<<curr->data<<"->";
                 curr=curr->next;
             }
-            cout<<curr->data<<"->NULL"<<endl;
+            cout<<curr->data<<"--->"<<curr->next->data<<endl;
         }
     }
 };
-
-
+ 
+ 
 int main(){
     llist newlist;
     int a,k;
@@ -137,21 +117,15 @@ int main(){
         newlist.insert(a);
         cin>>a;
     }
-    
     cout<<"\nLlist"<<endl;
     newlist.display();
-
     cout<<"Enter k ";
     cin>>k;
-    newlist.deletefromlast2ptr(k);
+    newlist.deletefromlast(k);
     newlist.display();
-
-    // newlist.reverse();
-    // cout<<"\nLlist after reversed"<<endl;
-    // newlist.display();
-    // newlist.recursion();
-    // cout<<"\nLlist after reversed using recursion"<<endl;
-    // newlist.display();
-    cout<<newlist.length();
+    newlist.reverse();
+    cout<<"Reversed : "<<endl;
+    newlist.display();
+    newlist.iscircular();
     return 0;
 }
