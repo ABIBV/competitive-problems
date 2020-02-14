@@ -1,7 +1,7 @@
 #include <iostream>
-
+ 
 using namespace std;
-
+ 
 class llist{
     struct Node{
         int data;
@@ -16,7 +16,7 @@ class llist{
         llist(){
             head = NULL;
         }
-
+ 
         void insert(int data){
             Node *temp = new Node(data);
             Node *curr;
@@ -43,7 +43,7 @@ class llist{
         //         curr=curr->next;
         //     }
         //     prev = curr->next;
-
+ 
         //     while(curr->next!=head){
         //         next = curr->next;
         //         curr->next = prev;
@@ -52,7 +52,7 @@ class llist{
         //     }
         //     head = prev;
         // }
-
+ 
          int length(){
             Node *curr;
             curr = head;
@@ -63,10 +63,9 @@ class llist{
             }
             return count;
         }
-
+ 
     void deletefromlast(int k){
         int l = length();
-        cout<<l;
         int del = l - k;
         Node *curr, *prev;
         curr = head;
@@ -77,6 +76,25 @@ class llist{
         prev->next=curr->next;
         curr= NULL;
     }
+    
+    void reverse(){
+      Node *curr, *next, *prev;
+      curr = head;
+      prev = head;
+      next = NULL;
+      while(prev->next!= head){
+        prev = prev -> next; 
+      }
+      while(next!=head){
+        next = curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=next;
+      }
+      head=prev;
+      
+    }
+    
     void display(){
         if(head == NULL){
             cout<<"No Node Present"<<endl;
@@ -92,8 +110,8 @@ class llist{
         }
     }
 };
-
-
+ 
+ 
 int main(){
     llist newlist;
     int a,k;
@@ -107,6 +125,9 @@ int main(){
     cout<<"Enter k ";
     cin>>k;
     newlist.deletefromlast(k);
+    newlist.display();
+    newlist.reverse();
+    cout<<"Reversed : "<<endl;
     newlist.display();
     return 0;
 }
