@@ -74,7 +74,22 @@ class llist{
         curr=next;
       }
       head=prev;
-      
+    }
+
+    void iscircular(){
+        Node *curr;
+        curr = head;
+        while(true){
+            curr = curr->next;
+            if(curr==head){
+                cout<<"List is Circular..."<<endl;
+                return;
+            }
+            if(curr==NULL){
+                cout<<"List is not Circular"<<endl;
+                return;
+            }
+        }
     }
     
     void display(){
@@ -111,5 +126,6 @@ int main(){
     newlist.reverse();
     cout<<"Reversed : "<<endl;
     newlist.display();
+    newlist.iscircular();
     return 0;
 }
