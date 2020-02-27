@@ -37,21 +37,22 @@ class Linkedlist{
             while(temp->next != NULL){
                 curr = temp->next;
                 prev = temp;
-                while(curr!= NULL){
+                while(curr->next!= NULL){
                     if(curr->data == temp->data){
                          prev ->next = curr->next;
                          curr = prev->next;
-             
                     }
                     else{
                         prev = curr;
                         curr = curr->next;
                     }
                  
-                }
+                } 
                 temp = temp->next;
             }
-            
+            if(prev->data == temp ->data){
+                prev->next = NULL;
+            }
         }
 
         void display(){

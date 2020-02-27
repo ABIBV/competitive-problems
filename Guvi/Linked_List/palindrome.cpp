@@ -81,13 +81,14 @@ int main(){
     int a,check;
     cin>>a;
     while(a!=-1){
-        list1.insert(a);
+        list1.insert((int)a);
         cin>>a;
     }
     cout<<"\nLlist"<<endl;
     list1.display();
     list2=list1;
     list2.reverse();
+    
     check = list1.checkPalindrome(list2.head);
     if(check == 0){
         cout<<"List is not a Palindrome..."<<endl;
