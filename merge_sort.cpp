@@ -64,16 +64,14 @@ class MergeSort{
 
 int main() 
 { 
-    int arr[20],arr_size;
+    MergeSort msort;
+    int arr[100],arr_size,i1,i2;
     cin>>arr_size;
     for(int i=0;i<arr_size;i++){
         cin>>arr[i];
     } 
-    MergeSort msort;
-    cout<<"Array before Sorting\n"; 
-    msort.display(arr, arr_size); 
-    msort.mergeSort(arr, 0, arr_size - 1); 
-    cout<<"\nArray after Sorting\n"; 
+    cin>>i1>>i2;
+    msort.mergeSort(arr, i1, i2); 
     msort.display(arr, arr_size); 
     return 0; 
 } 

@@ -34,18 +34,21 @@ class llist{
         }
          
     
-    void reverse(){
-      Node *curr, *next, *prev;
-      curr = head;
-      prev = NULL;
-      next = NULL;
-      while(curr!=NULL){
-        next = curr->next;
-        curr->next=prev;
-        prev=curr;
-        curr=next;
-      }
-      head=prev;
+    void rotate(int k){
+        Node *slow, *fast, *slowback;
+        slow = head;
+        fast = head;
+        for(int i=1;i<k;i++){
+            fast = fast->next;
+        }
+        while(fast->next!=NULL){
+            slowback = slow;
+            fast = fast->next;
+            slow = slow->next;
+        }
+        slowback->next = NULL;
+        fast->next = head;
+        head = slow;
     }
 
     
@@ -65,13 +68,14 @@ class llist{
  
 int main(){
     llist newlist;
-    int n,a;
+    int n,a,k;
     cin>>n;
     for(int i=0;i<n;i++){
         cin>>a;
         newlist.insert(a);
     }
-    newlist.reverse();
+    cin>>k;
+    newlist.rotate(k);
     newlist.display();
     return 0;
 }

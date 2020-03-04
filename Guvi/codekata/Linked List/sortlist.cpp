@@ -34,18 +34,21 @@ class llist{
         }
          
     
-    void reverse(){
-      Node *curr, *next, *prev;
-      curr = head;
-      prev = NULL;
-      next = NULL;
-      while(curr!=NULL){
-        next = curr->next;
-        curr->next=prev;
-        prev=curr;
-        curr=next;
-      }
-      head=prev;
+    void sort(){
+        Node *curr,*next;
+        curr = head;
+        while(curr->next!=NULL){
+            next = curr->next;
+            while(next!=NULL){
+                if(curr->data > next->data){
+                    int temp = curr->data;
+                    curr->data = next->data;
+                    next->data = temp;
+                }
+                next = next->next;
+            }
+            curr = curr->next;
+        }
     }
 
     
@@ -71,7 +74,7 @@ int main(){
         cin>>a;
         newlist.insert(a);
     }
-    newlist.reverse();
+    newlist.sort();
     newlist.display();
     return 0;
 }

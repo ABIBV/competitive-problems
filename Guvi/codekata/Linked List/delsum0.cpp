@@ -33,21 +33,9 @@ class llist{
         
         }
          
-    
-    void reverse(){
-      Node *curr, *next, *prev;
-      curr = head;
-      prev = NULL;
-      next = NULL;
-      while(curr!=NULL){
-        next = curr->next;
-        curr->next=prev;
-        prev=curr;
-        curr=next;
-      }
-      head=prev;
+    void delsum0(){
+        
     }
-
     
     void display(){
         if(head != NULL){
@@ -71,7 +59,7 @@ int main(){
         cin>>a;
         newlist.insert(a);
     }
-    newlist.reverse();
+    newlist.delsum0();
     newlist.display();
     return 0;
 }

@@ -1,5 +1,5 @@
 #include <iostream>
- 
+#include <map> 
 using namespace std;
  
 class llist{
@@ -11,6 +11,8 @@ class llist{
             this->next = NULL;
         }    
     };
+    map<int,Node*> mapping;
+
     public:
         Node *head;
         llist(){
@@ -22,6 +24,7 @@ class llist{
             Node *curr;
             if(head == NULL){
                 head = temp;
+                mapping[head->data] = head;
             }
             else{
                 curr=head;
@@ -29,49 +32,54 @@ class llist{
                     curr=curr->next;
                 }
                 curr->next=temp;
+                mapping[curr->data] = curr;
             }
-        
         }
          
-    
-    void reverse(){
-      Node *curr, *next, *prev;
-      curr = head;
-      prev = NULL;
-      next = NULL;
-      while(curr!=NULL){
-        next = curr->next;
-        curr->next=prev;
-        prev=curr;
-        curr=next;
-      }
-      head=prev;
-    }
-
-    
-    void display(){
-        if(head != NULL){
+         int length(){
             Node *curr;
             curr = head;
-            while(curr->next!=NULL){
-                cout<<curr->data<<" ";
-                curr=curr->next;
+            int count= 1;
+            while(curr->next!=head){
+                curr = curr->next;
+                count++;
             }
-            cout<<curr->data<<endl;
+            return count;
         }
-    }
+
+        void delnode(int k){
+            Node *del = mapping[k];
+            del->data = del->next->data;
+            del->next = del->next->next;
+        }
+    
+        void display(){
+            if(head == NULL){
+                cout<<"No Node Present"<<endl;
+            }
+            else{
+                Node *curr;
+                curr = head;
+                while(curr->next!=NULL){
+                    cout<<curr->data<<" ";
+                    curr=curr->next;
+                }
+                cout<<curr->data<<endl;
+            }
+        }
 };
  
  
 int main(){
     llist newlist;
-    int n,a;
+    int n,k,a;
     cin>>n;
     for(int i=0;i<n;i++){
         cin>>a;
         newlist.insert(a);
     }
-    newlist.reverse();
+    cin>>k;
+    newlist.delnode(k);
     newlist.display();
     return 0;
 }
